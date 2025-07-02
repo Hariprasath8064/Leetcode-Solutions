@@ -1,19 +1,23 @@
-// Last updated: 7/1/2025, 11:16:04 PM
+// Last updated: 7/2/2025, 9:22:59 PM
 class Solution {
-    public boolean isPowerOfTwo(int n) {
-        if(n < 1){
-            return false;
-        }
-        
-    
-        while(n % 2 == 0){
-            n /= 2;
-        }
-        if(n == 1){
-            return true;
-        }
-        return false;
+    public int characterReplacement(String s, int k) {
+        int[] count = new int[26];
+        int left = 0;
+        int maxCount = 0;
+        int maxLength = 0;
 
+        for (int right = 0; right < s.length(); right++) {
+            count[s.charAt(right) - 'A']++;
+            maxCount = Math.max(maxCount, count[s.charAt(right) - 'A']);
+
+            while ((right - left + 1) - maxCount > k) {
+                count[s.charAt(left) - 'A']--;
+                left++;
+            }
+
+            maxLength = Math.max(maxLength, right - left + 1);
+        }
+
+        return maxLength;
     }
-
 }
