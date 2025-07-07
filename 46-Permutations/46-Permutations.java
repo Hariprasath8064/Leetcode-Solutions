@@ -1,17 +1,12 @@
-// Last updated: 7/7/2025, 11:28:45 AM
+// Last updated: 7/7/2025, 11:39:23 AM
 class Solution {
-    public int findPeakElement(int[] nums) {
-        int left  = 0;
-        int right = nums.length - 1;
-        while(left < right){
-            int mid = (left +right) / 2;
-            if(nums[mid] < nums[mid +1]){
-                left = mid + 1;
-            }
-            else{
-                right = mid ;
-            }
+    public int maximumGap(int[] nums) {
+        Arrays.sort(nums);
+        int maxdiff = 0;
+        for(int i = 1 ; i < nums.length; i++){
+            int diff = nums[i] - nums[i - 1];
+            maxdiff = Math.max(maxdiff,diff);
         }
-        return left;
+        return maxdiff;
     }
 }
