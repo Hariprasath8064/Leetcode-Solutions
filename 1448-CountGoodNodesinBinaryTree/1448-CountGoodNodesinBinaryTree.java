@@ -1,4 +1,4 @@
-// Last updated: 7/11/2025, 11:34:22 PM
+// Last updated: 7/11/2025, 11:35:03 PM
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -27,7 +27,7 @@ class Solution {
         }
         if(root.val >= maxvalue){
             maxvalue = root.val;
-            res += 1;
+            res = 1;
         }
         res += search(root.right,maxvalue);
         res += search(root.left,maxvalue);
