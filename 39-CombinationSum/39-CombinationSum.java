@@ -1,26 +1,23 @@
-// Last updated: 7/20/2025, 11:52:56 PM
+// Last updated: 8/4/2025, 10:04:46 PM
 class Solution {
-    public int findShortestSubArray(final int[] nums) {
-        final Map<Integer, Integer> counts = new HashMap<>(), indexes = new HashMap<>();
-
-        int distance = 0, max = 0;
-
-        for(int i = 0; i < nums.length; ++i) {
-            final int num = nums[i];
-
-            indexes.putIfAbsent(num, i);
-
-            final int count = counts.getOrDefault(num, 0) + 1;
-            counts.put(num, count);
-
-            if(count > max) {
-                max = counts.get(num);
-                distance = i - indexes.get(num) + 1;
-            } else if(max == count) {
-                distance = Math.min(distance, i - indexes.get(num) + 1);
+    private void combo(int index, int[] array,int target, List<List<Integer>> ans,List<Integer> temp){
+        if(index == array.length){
+            if(target == 0){
+                ans.add(new ArrayList<>(temp));
             }
+            return;
         }
-
-        return distance;
+        if(array[index] <= target){
+            temp.add(array[index]);
+            combo(index,array,target - array[index],ans,temp);
+            temp.remove(temp.size() - 1);
+        }
+        combo(index + 1,array,target,ans,temp);
     }
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        combo(0,candidates,target,result,temp);
+        return result;
+    } 
 }
