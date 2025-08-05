@@ -1,28 +1,25 @@
-// Last updated: 8/6/2025, 12:25:00 AM
+// Last updated: 8/6/2025, 12:45:24 AM
 class Solution {
-    private void combo(int index, int[] array, int target, List<List<Integer>> ans , List<Integer> temp){
-        if(target == 0){
+    private void permute(int[] array,List<List<Integer>> ans,List<Integer> temp, boolean[] map){
+        if(temp.size() == array.length){
             ans.add(new ArrayList<>(temp));
+            return;
         }
-
-        for(int i = index; i < array.length;i++){
-            if(i > index && array[i] == array[i - 1]){
-                continue;
+        for(int i = 0;i < array.length;i++){
+            if(!map[i]){
+                map[i] = true;
+                temp.add(array[i]);
+                permute(array,ans,temp,map);
+                temp.remove(temp.size() - 1);
+                map[i] = false;
             }
-            if(array[i] > target){
-                break;
-            }
-            temp.add(array[i]);
-            combo(i + 1,array,target - array[i],ans,temp);
-            temp.remove(temp.size() - 1);
         }
     }
-    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        List<List<Integer>> ans = new ArrayList<>();
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
         List<Integer> temp = new ArrayList<>();
-        Arrays.sort(candidates);
-        combo(0,candidates,target,ans,temp);
-        return ans;
-
+        boolean map[] = new boolean[nums.length];
+        permute(nums,res,temp,map);
+        return res;
     }
 }
