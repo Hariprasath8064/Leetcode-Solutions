@@ -1,40 +1,20 @@
-// Last updated: 6/19/2025, 11:47:19 PM
+// Last updated: 9/9/2025, 8:55:29 PM
 class Solution {
-    public List<List<Integer>> threeSum(int[] nums) {
-        Arrays.sort(nums);
-        List<List<Integer>> answer = new ArrayList<>();
-        Set<List<Integer>> temp = new HashSet<>();
-
-
-        for(int i=0; i<nums.length; i++) {
-            if (i > 0 && nums[i] == nums[i-1]) {
-                continue;
-            }
-            int a=i+1;
-            int b=nums.length-1;
-            while(a<b) {
-                if(nums[i]+ nums[a]+nums[b] ==0) {
-                    answer.add(Arrays.asList(nums[i], nums[a], nums[b]));
-                    a++;
-                    while(a<b && nums[a]==nums[a-1]){
-                        a++;
-                    }
-                }
-                else if(nums[i]+ nums[a]+nums[b]>0) {
-                    b--;
-                    while(a<b && nums[b]==nums[b+1]){
-                        b--;
-                    }
-                }
-                else {
-                    a++;
-                    while(a<b && nums[a]==nums[a-1]){
-                        a++;
-                    }
-                }
-            }
+    public int numJewelsInStones(String jewels, String stones) {
+        Set<Character> map1 = new HashSet<>();
+        int count = 0;
+        for (int i = 0; i < jewels.length(); i++) {
+            char j = jewels.charAt(i);
+            map1.add(j);
         }
-        answer.addAll(temp);
-        return answer;
+
+        for (int i = 0; i < stones.length(); i++) {
+            char s = stones.charAt(i);
+            if (map1.contains(s)) {
+                count++;
+            }
+
+        }
+        return count;
     }
 }
