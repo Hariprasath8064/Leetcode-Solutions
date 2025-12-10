@@ -1,22 +1,16 @@
-// Last updated: 12/7/2025, 11:18:12 PM
+// Last updated: 12/10/2025, 3:19:18 PM
 1class Solution {
-2    public int[] smallerNumbersThanCurrent(int[] nums) {
-3        int n = nums.length;
-4        int[] ans = new int[n];
-5
-6        for (int i = 0; i < n; i++) {
-7            int count = 0;
-8
-9            for (int j = 0; j < n; j++) {
-10                if (nums[j] < nums[i]) {
-11                    count++;
-12                }
-13            }
-14
-15            ans[i] = count;
-16        }
-17
-18        return ans;
-19    }
-20}
-21
+2    public List<Integer> findDisappearedNumbers(int[] nums) {
+3        HashSet<Integer> set = new HashSet<>();
+4        ArrayList<Integer> ans = new ArrayList<>();
+5        for(int i: nums){
+6            set.add(i);
+7        }
+8        for(int i = 1; i<= nums.length;i++){
+9            if(!set.contains(i)){
+10                ans.add(i);
+11            }
+12        }
+13        return ans;
+14    }
+15}
